@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=duckdb
+Comment=duckdb CLI
+Exec=duckdb
+Icon=duckdb
+Categories=Office;
+
