@@ -58,12 +58,35 @@ jobs:
           ${{ env.IMAGE }}:${{ env.BUILD_VER }}
         push: true
 
-    - run: docker run --name duckdb ${{ env.IMAGE }}:latest duckdb -version && docker cp duckdb:/usr/local/bin/duckdb-x86_64.AppImage .
+    - run: docker run --name duckdb ${{ env.IMAGE }}:latest duckdb -version && docker cp duckdb:/usr/local/bin/duckdb-x86_64.AppImage . && chmod +x duckdb-x86_64.AppImage
 
     -
-      name: Upload
+      name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
         name: duckdb-x86_64.AppImage
         path: "*.AppImage"
 
+    - 
+      name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
+
+    - 
+      name: Upload Release Asset
+      id: upload-release-asset 
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} 
+        asset_path: ./duckdb-x86_64.AppImage
+        asset_name: duckdb-x86_64.AppImage
+        asset_content_type: application/vnd.appimage

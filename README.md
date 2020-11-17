@@ -54,9 +54,5 @@ Then use `make extract` to copy out the duckdb binary or the duckdb-AppImage.
 
 The resulting duckdb-AppImage should work on many x64 linuxes.
 
-NB: Instead of using "linuxdeploy", the "appimage-builder" could be used:
-
-- <https://github.com/tyu1996/opera-AppImage/blob/master/opera.yml>
-
-
+NB: Instead of using "linuxdeploy", the ["appimage-builder"](https://appimage-builder.readthedocs.io/en/latest/hosted-services/github-actions.html) could be used and would require another config file similar to this [one](<https://github.com/tyu1996/opera-AppImage/blob/master/opera.yml>).
 
