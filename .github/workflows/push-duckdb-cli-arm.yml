@@ -70,5 +70,5 @@ jobs:
           ${{ env.IMAGE }}:${{ env.GIT_SHA }}
           ${{ env.IMAGE }}:${{ env.BUILD_VER }}
         push: true
-        outputs: platforms=linux/arm/v6,linux/arm/v7,linux/amd64
+        platforms: linux/arm/v6,linux/arm/v7,linux/amd64
 
