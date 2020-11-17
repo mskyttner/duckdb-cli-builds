@@ -1,13 +1,20 @@
 # duckdb-cli-appimage
 
-This repo contains some files for a local (and cloud) build of the duckdb CLI tool:
+This repo contains some files for local (and cloud) builds of the duckdb CLI tool.
+
+## Cloud builds
+
+Sets up [a GitHub Action](.github/workflows/push-duckdb-cli-appimage.yml) for the appimage build.
+Sets up [a GitHub Action](.github/workflows/push-duckdb-cli-arm.yml) for the arm build.
+
+## Local builds
+
+Docker (and the buildx docker CLI-plugin for ARM) is required, and `make`.
 
 - ./appimage contains files for building an AppImage for x64 linuxes (baked into a container image)
 - ./arm contains files for building the duckdb CLI for arm/v6, arm/v7 (rpis etc) and linux/amd64
 
-Docker (and the buildx docker CLI-plugin for ARM) is required, and `make`.
-
-## ARM build
+### ARM build
 
 For this you need docker and a cli-plugin (that comes with Docker Desktop) called buildx. Docker Desktop is needed only if you're on MacOS or Windows. If on Docker Community Edition, the tools can be set up like so:
 
@@ -31,7 +38,7 @@ In the ./arm directory, there is a Makefile.
 
 Use `make build` to build the multistage Dockerfile.
 
-## AppImage build
+### AppImage build
 
 In the ./appimage directory, there is a Makefile.
 
@@ -45,15 +52,9 @@ Use `make extract` to copy out the duckdb binary or the duckdb-AppImage.
 
 The resulting duckdb-AppImage should work on many x64 linuxes.
 
-### Alternatives
-
-Instead of using "linuxdeploy", the "appimage-builder" could be used:
+NB: Instead of using "linuxdeploy", the "appimage-builder" could be used:
 
 - <https://github.com/tyu1996/opera-AppImage/blob/master/opera.yml>
 
-# Building in the cloud
 
-Sets up [a GitHub Action](.github/workflows/push-duckdb-cli-appimage.yml) for the appimage build.
-
-Sets up [a GitHub Action](.github/workflows/push-duckdb-cli-arm.yml) for the arm build.
 
