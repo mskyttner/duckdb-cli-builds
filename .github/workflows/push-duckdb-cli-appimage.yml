@@ -58,11 +58,12 @@ jobs:
           ${{ env.IMAGE }}:${{ env.BUILD_VER }}
         push: true
 
+    - run: docker run --name duckdb ${{ env.IMAGE }}:latest duckdb -version && docker cp duckdb:/usr/local/bin/duckdb-x86_64.AppImage .
+
     -
       name: Upload
-      run: docker run --name duckdb ${{ env.IMAGE }}:latest duckdb -version && docker cp duckdb:/usr/local/bin/duckdb-x86_64.AppImage .
       uses: actions/upload-artifact@v2
       with:
         name: duckdb-x86_64.AppImage
         path: "*.AppImage"
-     
+
