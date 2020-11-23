@@ -16,9 +16,9 @@ RUN curl -fL https://github.com/cwida/duckdb/archive/v0.2.2.tar.gz -o duckdb.tgz
 RUN curl "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage" -L --output appimagetool-x86_64.AppImage --silent && \
     chmod a+x appimagetool-x86_64.AppImage
 
-RUN N_CPU=$((`nproc --all`-1)) && \
+RUN N_CPU=$((`nproc --all`-0)) && \
 	echo "Number of CPUs: $N_CPU" && \
-	cmake . -DCMAKE_INSTALL_PREFIX=/usr && \
+	cmake -G "Unix Makefiles" -DCMAKE_INSTALL_PREFIX=/usr -DBUILD_PARQUET_EXTENSION=TRUE -DCMAKE_BUILD_TYPE=Release -DBUILD_UNITTESTS=0 -DDISABLE_UNITY=1 . && \
 	make -j$N_CPU && \
 	make install DESTDIR=AppDir
 
