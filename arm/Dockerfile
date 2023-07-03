@@ -15,7 +15,7 @@ RUN curl -fL https://github.com/cwida/duckdb/archive/v0.2.2.tar.gz -o duckdb.tgz
 
 RUN cmake . -G Ninja
 
-RUN N_CPU=$((`nproc --all`-1)) && \
+RUN N_CPU=$((`nproc --all`-0)) && \
 	echo "Number of CPUs: $N_CPU" && \
 	ninja -j $N_CPU
 
